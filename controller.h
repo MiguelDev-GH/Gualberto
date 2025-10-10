@@ -7,6 +7,7 @@
 void pinto();
 
 struct value{
+    int type;
     int valueInt;
     float valueFloat;
     struct string valueStr;
