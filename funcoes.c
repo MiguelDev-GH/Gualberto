@@ -8,8 +8,9 @@ let str(char string[]){
     // Basicamente só faltava a gente passar o valor pra string ...
     strcpy(valor, string );
     let str_data;
-
-    return valor;
+    str_data->type = TYPE_STR;
+    str_data->value = valor;
+    return str_data;
 }
 
 list newList(){
@@ -38,6 +39,13 @@ void print(int num_de_args,...){
                 }else{
                     printf("%s","true");
                 }
+            }
+            case TYPE_LIST : {
+                list * this_list = (list*)arg->value;
+                struct element * el_current = this_list->tail;
+                for (int index=0; index<this_list->length;index++){
+                    el_current->data;
+                }    
             }
         default:
             break;
