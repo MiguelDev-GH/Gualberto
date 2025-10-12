@@ -4,6 +4,11 @@
 
 // Variáveis, Função e Structs
 
+#define TYPE_INT = 1;
+#define TYPE_STR = 0;
+#define TYPE_FLOAT = 2;
+#define TYPE_BOOL = 3;
+#define TYPE_NULL = 4;
 struct element{
     // Elemento anterior da lista
     struct element *last;
@@ -26,6 +31,6 @@ char* str(char string[]);
 
 list newList();
 typedef char* string;
-void lAppend(list* lInstance, void* value);
+void lAppend(list* lInstance, void* value, int type);
 struct element* lPop(list* lInstance);
 string lView();

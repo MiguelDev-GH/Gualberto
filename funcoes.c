@@ -16,11 +16,13 @@ list newList(){
 }
 
 string lView(list* lInstance){
+    struct element* el= lInstance->tail;
     for(int i=0; i<lInstance->length-1;i++){
-        void* value;
+        void* value = el->value;
     }
 }
-void lAppend(list* lInstance, void* value){
+
+void lAppend(list* lInstance, void* value, int type){
     struct element *newElement = malloc(sizeof(struct element));
     if(newElement == NULL){
         return;
