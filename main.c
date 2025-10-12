@@ -9,10 +9,17 @@
 #include "controller.h"
 
 int main(){
-    string coco = str("merda");
-    printf("%s",coco);
+    let coco = str("merda");
     // Ta funfando p-p
-    
-    list animais = newList();
+
+    let lista_generica = newList();
+    lAppend(lista_generica, coco);
+    let lista_generica2 = newList();
+    lAppend(lista_generica2, str("gato"));
+    lAppend(lista_generica2, str("cao"));
+
+    lAppend(lista_generica,lista_generica2); // lista dentro da lista pra testar a eficácia
+    print(1,lista_generica);
+
     return 0;
 }

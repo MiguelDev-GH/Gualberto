@@ -13,10 +13,12 @@
 #define TYPE_LIST 5
 #define true 1
 #define false 0
+
 typedef struct data{
     int type;
     void* value;
-}* let;
+} gen_data;
+typedef gen_data* let;
 
 struct element{
     // Elemento anterior da lista
@@ -38,8 +40,8 @@ typedef struct lista{
 
 let str(char string[]);
 
-list newList();
+let newList();
+void print(int num_de_args,...);
 typedef char* string;
-void lAppend(list* l_instance, let value);
-struct element* lPop(list* l_instance);
-string lView();
+void lAppend(let list_value, let data_value);
+struct element* lPop(let list_value);
