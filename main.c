@@ -1,4 +1,7 @@
-//#include "funcoes.c"
+// PADRÕES
+// NOMEAMENTO DE VARIAVEIS E STRUCTS = snake_case
+// NOMEAMENTO DE CONSTANTES = SCREAMING_SNAKE_CASE
+// NOMEAMENTO DE FUNÇÕES = canonCase
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,12 +1,14 @@
 #include "controller.h"
 
-char* str(char string[]){
+let str(char string[]){
     int len;
     len = strlen(string);
     char *valor = malloc(len+1*sizeof(char));
 
     // Basicamente só faltava a gente passar o valor pra string ...
     strcpy(valor, string );
+    let str_data;
+
     return valor;
 }
 
@@ -15,37 +17,58 @@ list newList(){
     return temp;
 }
 
-string lView(list* lInstance){
-    struct element* el= lInstance->tail;
-    for(int i=0; i<lInstance->length-1;i++){
-        void* value = el->value;
+void print(int num_de_args,...){
+    va_list args;
+    va_start(args,num_de_args);
+    for (int i = 0; i<num_de_args;i++){
+        let arg = va_arg(args,let);
+        switch (arg->type)
+        {
+            case TYPE_STR : {
+                printf("%s",(char*)arg->value);
+                break;
+            }
+            case TYPE_INT : {
+                printf("%i", (int*)arg->value);
+                break;
+            }
+            case TYPE_BOOL : {
+                if((int*)arg->value == false){
+                    printf("%s","false");
+                }else{
+                    printf("%s","true");
+                }
+            }
+        default:
+            break;
+        }
     }
 }
 
-void lAppend(list* lInstance, void* value, int type){
+void lAppend(list* l_instance, let data_value){
     struct element *newElement = malloc(sizeof(struct element));
     if(newElement == NULL){
         return;
     }
-    newElement->value = value;
+    newElement->data = data_value;
     newElement->next = NULL;
-    newElement->last = lInstance->head;
+    newElement->last = l_instance->head;
 
-    lInstance->head = newElement;
-    if(lInstance->tail==NULL){
-        lInstance->tail = newElement;
+    l_instance->head = newElement;
+    if(l_instance->tail==NULL){
+        l_instance->tail = newElement;
     }
-    lInstance->length = lInstance->length + 1;
+    l_instance->length = l_instance->length + 1;
 }
 
-struct element* lPop(list* lInstance){
-    struct element* newHead = lInstance->head->last;
-    void* lastHead = lInstance->head->value;
-    if (lInstance->tail == lInstance->head){
-        lInstance->tail == NULL;
+struct element* lPop(list* l_instance){
+    struct element* newHead = l_instance->head->last;
+    void* lastHead = l_instance->head->data;
+    if (l_instance->tail == l_instance->head){
+        l_instance->tail == NULL;
     }
-    free(lInstance->head);
-    lInstance->head = newHead;
-    lInstance->length = lInstance->length -1;
+    free(l_instance->head);
+    l_instance->head = newHead;
+    l_instance->length = l_instance->length -1;
     return lastHead;
 }
