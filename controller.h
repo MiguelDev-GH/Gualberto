@@ -2,29 +2,30 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Variáveis, Função e Struct
-
-void pinto();
-
-struct value{
-    int type;
-    int valueInt;
-    float valueFloat;
-    struct string valueStr;
-}
+// Variáveis, Função e Structs
 
 struct element{
     // Elemento anterior da lista
     struct element *last;
     // Próximo elemento da lista
     struct element *next;
-    // Valor do Elemento
-    struct value value;
-}
+    // Valor do Elemento (um ponteiro que não precisa especificar o tipo da varíavel q ele aponta)
+    void *value;
+};
 
 struct lista{
     // Elemento no topo da lista
-    struct element head;
+    struct element *head;
     // Elemento no começo da lista
-    struct element tail;
-}
+    struct element *tail;
+    int length;
+};
+typedef struct lista list;
+
+char* str(char string[]);
+
+list newList();
+typedef char* string;
+void lAppend(list* lInstance, void* value);
+struct element* lPop(list* lInstance);
+string lView();
