@@ -5,7 +5,7 @@
 // POR ENQUANTO O PONTO DE ATENÇÃO É Q SE QUEM NÃO ESTÁ USANDO NÃO COLOCAR UM FREE VAI FICAR OCUPANDO ESPAÇO DO CÓDIGO
 
 // ## CRIA O TIPO DE DADO STR; AJUSTADO O TAMANHO DINÂMICAMENTE
-let str(char string[]){
+let str(char* string){
     int len, size;
     len = strlen(string);
     size = len+1*sizeof(char);
@@ -20,11 +20,42 @@ let str(char string[]){
 }
 
 // ## CRIANDO O TIPO DE DADO PARA INTEIROS
-let integer(){
-    // tem que fazer código ainda p-p to cansado dps faço
+let integer(long long num){
     // basicamente o objetivo é ver dinamicamente quantos bytes seria necessário para salvar esse valor ex.: int, long int, long long;
+    let int_data = malloc(sizeof(gen_data));
+    if(int_data == NULL) return NULL;
+
+    // Entende qual o tamanho necessário para guardar o número e cria a variavel
+    if(num > SHRT_MIN && num <  SHRT_MAX ){
+        int_data->value = malloc(sizeof(short));
+        int_data->type = TYPE_SHORT;
+        if (int_data->value == NULL) return NULL;
+        *(short*)int_data->value = (short)num;
+    } else if (num> INT_MIN && num<INT_MAX ){
+        int_data->value = malloc(sizeof(int));
+        int_data->type = TYPE_INT;
+        if (int_data->value == NULL) return NULL;
+        *(int*)int_data->value = (int)num;
+    } else if (num > LONG_MIN && num<LONG_MAX){
+        int_data->value = malloc(sizeof(long));
+        int_data->type = TYPE_LONG;
+        if (int_data->value == NULL) return NULL;
+        *(long*)int_data->value = (long)num;
+    } else if(num > LONG_LONG_MIN && num < LONG_LONG_MAX){
+        int_data->value = malloc(sizeof(long long));
+        int_data->type = TYPE_LONG_LONG;
+        if (int_data->value == NULL) return NULL;
+        *(long long*)int_data->value = num;
+    }
+    return int_data;
 }
 
+// função para trocar o valor de uma varíavel, limpando seu valor antigo e otimizando memória
+void nv(let var, let newValue){
+    free(var->value);
+    var->value = newValue->value;
+    var->type = newValue->type;
+}
 // ## CRIANDO A LISTA E O TIPO DE DADO DA LISTA
 let newList(){
     // Isto gerá a instância da lista
@@ -52,8 +83,20 @@ void printCommonData(let data){
             data->value);
             break;
         }
+        case TYPE_SHORT: {
+            printf("%hi", *(short*)data->value);
+            break;
+        }
         case TYPE_INT : {
-            printf("%i", data->value);
+            printf("%i", *(int*)data->value);
+            break;
+        }
+        case TYPE_LONG : {
+            printf("%ld", *(long*)data->value);
+            break;
+        }
+        case TYPE_LONG_LONG : {
+            printf("%lld",*(long long*)data->value);
             break;
         }
         case TYPE_FLOAT : {
