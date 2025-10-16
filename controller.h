@@ -48,12 +48,14 @@ typedef struct lista{
 let str(char string[]);
 // ## TIPO INT (DO SHORT ATÉ O LONG)
 let integer(long long num);
-
+// ## TIPO BOOL 
+let boolean(short value);
 // ALTERAR VALOR DE UMA VARÍAVEL INTELIGENTE
 void nv(let var, let newValue);
 
 let newList();
 void print(int num_de_args,...);
 typedef char* string;
+let lGet(let list_value,int index);
 void lAppend(let list_value, let data_value);
 struct element* lPop(let list_value);

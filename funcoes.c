@@ -50,6 +50,20 @@ let integer(long long num){
     return int_data;
 }
 
+// ## CRIANDO O TIPO DE DADO PARA BOOLEANOS
+let boolean(short value){
+    let bool_data = malloc(sizeof(gen_data));
+    bool_data->type = TYPE_BOOL;
+    bool_data->value = malloc(sizeof(short));
+
+    if(value == false){
+        *(int*)bool_data->value = false;
+    }else{
+        *(int*)bool_data->value = true;
+    }
+    return bool_data;
+}
+
 // função para trocar o valor de uma varíavel, limpando seu valor antigo e otimizando memória
 void nv(let var, let newValue){
     free(var->value);
@@ -177,6 +191,30 @@ void lAppend(let list_value, let data_value){
         l_instance->tail = newElement;
     }
     l_instance->length = l_instance->length + 1;
+}
+// ## PEGAR ELEMENTO DA LISTA
+let lGet(let list_value,int index){
+    list* l_instance = list_value->value; 
+    // Verifica qual a rota mais rápida para buscar o valor desejado
+    if(l_instance->length==1 || index == 0){
+        return l_instance->tail->data;
+    }else if( index==l_instance->length-1){
+
+        return l_instance->head->data;
+    } else if (index<=(l_instance->length/2)){
+       struct element* current_el = l_instance->tail; 
+        for (int i = 0;i<index;i++){
+            current_el = current_el->next;   
+        }
+        return current_el->data;
+    }else{
+        struct element* current_el = l_instance->head; 
+        for (int i = l_instance->length-1;i>index;i--){
+            printf("%i", i,"%s\n");
+            current_el = current_el->last;   
+        }
+        return current_el->data;
+    }
 }
 
 // ## REMOVER ÚLTIMO ELEMENTO DA LISTA
