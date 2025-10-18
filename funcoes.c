@@ -48,15 +48,15 @@ void printCommonData(let data){
     {
         // Auto explicativo
         case TYPE_STR : {
-            printf("%p",data->value);
+            printf("%s",(char*) data->value);
             break;
         }
         case TYPE_INT : {
-            printf("%p", data->value);
+            printf("%d",*(int*) data->value);
             break;
         }
         case TYPE_FLOAT : {
-            printf("%p",data->value);
+            printf("%f",*(float*) data->value);
             break;
         }
         case TYPE_BOOL : {
