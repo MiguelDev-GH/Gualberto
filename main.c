@@ -3,10 +3,7 @@
 // NOMEAMENTO DE CONSTANTES = SCREAMING_SNAKE_CASE
 // NOMEAMENTO DE FUNÇÕES = canonCase
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "controller.h"
+#include "funcoes.c"
 
 int main(){
     let coco = integer(150000);
